@@ -1,5 +1,4 @@
 import requests
-from logging_config import logger
 from abc import ABC, abstractmethod
 
 
@@ -96,10 +95,12 @@ class Paradi(ABC):
         else:
             logger.info("dialoger closed")
 
+    @classmethod
     def __new__(cls, *args, **kwargs):
         if cls is Paradi:
             raise TypeError(f"Cannot create an instance of '{cls.__name__}' because it is an abstract class")
-        return object.__new__(cls, *args, **kwargs)
+        else:
+            return object.__new__(cls)
 
     def _request(self,
                  verb: str,
