@@ -1,5 +1,6 @@
 import requests
 from abc import ABC, abstractmethod
+from logging_config import logger
 
 
 class Paradi(ABC):
