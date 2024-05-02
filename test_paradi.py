@@ -11,7 +11,8 @@ class TestParadiClass(Paradi):
     def _save_auth(self,
                    response: requests.Response
                    ):
-        self.auth = {}
+        if response.status_code == 200:
+            self.auth = {"auth_saved": True}
 
 
 test_paradi_instance = TestParadiClass(entry="https://http.cat/",
@@ -39,4 +40,6 @@ class TestParadi(TestCase):
         self.assertEqual(test_paradi_instance.post("200").status_code, 200)
 
     def test__save_auth(self):
-        self.fail()
+        response = test_paradi_instance.post("200")
+        test_paradi_instance._save_auth(response=response)
+        self.assertIsNotNone(test_paradi_instance.auth)
