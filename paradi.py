@@ -35,37 +35,7 @@ class Paradi(ABC):
         self.loginURI = login_uri
         self.logoutURI = logout_uri
         self.login_kwargs = login_kwargs
-        self.session = requests.session()  # to keep the connection alive
-
-    def __request(self,
-                  verb: str,
-                  ressource: str,
-                  **kwargs
-                  ) -> requests.Response:
-        """
-        private method to access the API's ressources
-
-        :param verb: http verb to use
-        :type verb: str
-        :param ressource: the endpoint to access
-        :type ressource: str
-
-        :return: the response from the API
-        :raises: ConnectionError
-        """
-
-        if len(kwargs) > 0:
-            logger.debug(f"{verb} request sent at {self.entry}/{ressource} with kwargs {tuple(kwargs)}")
-        else:
-            logger.debug(f"{verb} request sent at {self.entry}/{ressource}")
-
-        response = self.session.request(verb, self.entry + "/" + ressource, **kwargs)
-
-        match response.status_code:
-            case code if 200 <= code < 300:
-                return response
-            case _:
-                raise ConnectionError(f'{response.status_code} {response.reason}')
+        self.session = requests.session()
 
     def __enter__(self):
         try:
@@ -100,6 +70,36 @@ class Paradi(ABC):
         if cls is Paradi:
             raise TypeError(f"Cannot create an instance of '{cls.__name__}' because it is an abstract class")
         return object.__new__(cls, *args, **kwargs)
+
+    def __request(self,
+                  verb: str,
+                  ressource: str,
+                  **kwargs
+                  ) -> requests.Response:
+        """
+        private method to access the API's ressources
+
+        :param verb: http verb to use
+        :type verb: str
+        :param ressource: the endpoint to access
+        :type ressource: str
+
+        :return: the response from the API
+        :raises: ConnectionError
+        """
+
+        if len(kwargs) > 0:
+            logger.debug(f"{verb} request sent at {self.entry}/{ressource} with kwargs {tuple(kwargs)}")
+        else:
+            logger.debug(f"{verb} request sent at {self.entry}/{ressource}")
+
+        response = self.session.request(verb, self.entry + "/" + ressource, **kwargs)
+
+        match response.status_code:
+            case code if 200 <= code < 300:
+                return response
+            case _:
+                raise ConnectionError(f'{response.status_code} {response.reason}')
 
     def _request(self,
                  verb: str,
