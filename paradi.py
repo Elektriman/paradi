@@ -158,7 +158,7 @@ class Paradi(ABC):
         :return: the API's response
         """
 
-        if response := self.__request(verb="GET",
+        if response := self.__request(verb="POST",
                                       ressource=ressource,
                                       **kwargs):
             return response
