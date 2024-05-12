@@ -2,11 +2,7 @@ from unittest import TestCase
 import requests
 from paradi import Paradi
 import json
-import threading
-from flask_test_api import app
 
-
-server = threading.Thread(target=app.run, name="server")
 
 with open("http.json", "r") as f:
     http_dict = json.load(f)
@@ -30,13 +26,6 @@ test_paradi_instance = TestParadiClass(entry="http://127.0.0.1:5000",
 
 
 class TestParadi(TestCase):
-    @classmethod
-    def setUpClass(cls):
-        server.start()
-
-    @classmethod
-    def tearDownClass(cls):
-        server.join()
 
     def test_instantiate(self):
         self.assertRaises(TypeError, Paradi.__new__)

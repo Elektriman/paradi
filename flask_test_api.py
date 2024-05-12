@@ -67,3 +67,7 @@ def post(input_type: str):
 def shutdown():
     shutdown_server()
     return 'Server shutting down...'
+
+
+if __name__ == "__main__":
+    app.run()
