@@ -1,5 +1,0 @@
-name: Publish to Pypi
-description: publish this package to pypi
-runs:
-  using: 'node20'
-  main: 'main.js'
