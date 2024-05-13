@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "paradi"
-version = "0.1.2"
+version = "{{ VERSION_PLACEHOLDER }}"
 authors = [
     { name="Julien Crambes", email="julien.crambes@gmail.com" },
 ]
