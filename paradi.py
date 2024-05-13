@@ -122,7 +122,7 @@ class Paradi(ABC):
         if verb.upper() not in ["GET", "POST", "PUT", "PATCH", "DELETE"]:
             raise ValueError(f"{verb.upper()} is not a valid HTTP method")
 
-        if response := self.__request(verb=verb,
+        if response := self.__request(verb=verb.upper(),
                                       ressource=ressource,
                                       **kwargs):
             return response
