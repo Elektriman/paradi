@@ -1,8 +1,11 @@
+# %% imports
+import json
 import os
 from flask import Flask, abort, request, make_response
-import json
+from dotenv import load_dotenv
 
-LWD = os.path.dirname(os.path.abspath(__name__))
+# %% constants
+load_dotenv()
 with open("http.json", "r") as f:
     http_dict = json.load(f)
 
@@ -13,6 +16,9 @@ def create_app(config: dict = None):
     return app_instance
 
 
+app = create_app()
+
+
 def shutdown_server():
     func = request.environ.get('werkzeug.server.shutdown')
     if func is None:
@@ -20,7 +26,7 @@ def shutdown_server():
     func()
 
 
-app = create_app()
+# %% Routing
 
 
 @app.route("/")
@@ -31,12 +37,15 @@ def index():
 @app.route("/http/<int:status_code>", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
 def http_code_check(status_code: int):
     if status_code >= 400:
-        abort(status_code)
+        try:
+            abort(status_code)
+        except LookupError:
+            abort(500)
 
     return make_response(http_dict[str(status_code)], status_code)
 
 
-@app.route("/post/<string:input_type>", methods=["POST"])
+@app.route("/post/<string:input_type>", methods=["GET", "POST"])
 def post(input_type: str):
     response = make_response(f"{input_type} post successfully", 200)
     response.content_type = "application/json"
@@ -63,11 +72,15 @@ def post(input_type: str):
     return response
 
 
-@app.get('/shutdown')
+@app.route('/shutdown')
 def shutdown():
     shutdown_server()
     return 'Server shutting down...'
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host=os.getenv("TEST_SERVER_HOSTNAME"),
+            port=os.getenv("TEST_SERVER_PORT"),
+            debug=True,
+            use_reloader=False,
+            threaded=True)

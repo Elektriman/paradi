@@ -1,14 +1,17 @@
 import logging
 import sys
+import os
+
+LWD = os.path.dirname(os.path.abspath(__file__))
 
 # Create logger
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 # Create handlers
-debug_handler = logging.FileHandler('logs/debug.log')
+debug_handler = logging.FileHandler(os.path.join(LWD, 'logs/debug.log'))
 debug_handler.setLevel(logging.DEBUG)
-info_handler = logging.FileHandler('logs/info.log')
+info_handler = logging.FileHandler(os.path.join(LWD, 'logs/info.log'))
 info_handler.setLevel(logging.INFO)
 cmd_handler = logging.StreamHandler(sys.stdout)
 cmd_handler.setLevel(logging.INFO)
