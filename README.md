@@ -37,7 +37,7 @@ To use your newly made class you need to use the `with` syntax provided by pytho
 
 ```py
 with Dummy() as dummy:
-  raw_data = dummy.get_raw_data()
+    raw_data = dummy.get_raw_data()
 ```
 This will ensure that the connection with your API is closed as soon as you are finished with the data recovery.
 
