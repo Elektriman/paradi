@@ -82,5 +82,4 @@ if __name__ == "__main__":
     app.run(host=os.getenv("TEST_SERVER_HOSTNAME"),
             port=os.getenv("TEST_SERVER_PORT"),
             debug=True,
-            use_reloader=False,
-            threaded=True)
+            use_reloader=False)
