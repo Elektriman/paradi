@@ -1,3 +1,7 @@
 venv/
+paradi.egg-info/
+build/
+dist/
 .idea/
 .env
+.pypirc
