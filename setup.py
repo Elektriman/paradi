@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='paradi',
-    version='0.1.2',
+    version='{{VERSION_PLACEHOLDER}}',
     packages=find_packages(),
     install_requires=[
         "requests>=2.31.0"
