@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 # %% constants
 load_dotenv()
-with open("../http.json", "r") as f:
+with open("http.json", "r") as f:
     http_dict = json.load(f)
 
 
