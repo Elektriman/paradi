@@ -1,8 +1,10 @@
+# %% imports
 import requests
 from abc import ABC, abstractmethod
 from logging_config import logger
 
 
+# %% main class
 class Paradi(ABC):
     """
     Python Abstract Restful API Dialoger Interface
