@@ -27,13 +27,13 @@ jobs:
       run: echo ::set-output name=TAG_NAME::$(echo $GITHUB_REF | cut -d / -f 3)
     - name: Update version in setup.py
       run: >-
-        sed -i "s/{{ VERSION_PLACEHOLDER }}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py --in-place
+        sed -i --in-place "s/{{ VERSION_PLACEHOLDER }}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
     - name: Update version in __init__.py
       run: >-
-        sed -i "s/{{ VERSION_PLACEHOLDER }}/${{ steps.tag.outputs.TAG_NAME }}/g" __init__.py --in-place
+        sed -i --in-place "s/{{ VERSION_PLACEHOLDER }}/${{ steps.tag.outputs.TAG_NAME }}/g" __init__.py
     - name: Update version in pyproject.toml
       run: >-
-        sed -i "s/{{ VERSION_PLACEHOLDER }}/${{ steps.tag.outputs.TAG_NAME }}/g" pyproject.toml --in-place
+        sed -i --in-place "s/{{ VERSION_PLACEHOLDER }}/${{ steps.tag.outputs.TAG_NAME }}/g" pyproject.toml
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
