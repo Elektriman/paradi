@@ -56,7 +56,7 @@ class Paradi(ABC):
                  ):
         if exc_type:  # an error occurred during the `with` statement
             raise IOError(f"The following error occurred during API dialog :\n" +
-                          f"{exc_type}:{exc_val}\n" +
+                          f"{exc_type} : {exc_val}\n" +
                           f"{exc_tb}")
         elif self.logoutURI:
             try:
