@@ -3,7 +3,7 @@ import pytest
 import requests
 import json
 import os
-from paradi import Paradi
+from paradi.paradi import Paradi
 from dotenv import load_dotenv
 
 
