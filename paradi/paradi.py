@@ -175,7 +175,3 @@ class Paradi(ABC):
         :param response: the response object from the call of the login endpoint
         """
         ...
-
-
-if __name__ == "__main__":
-    raise NotImplementedError("Cannot invoke package as `__main__`, use `import`")
