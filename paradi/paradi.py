@@ -55,9 +55,7 @@ class Paradi(ABC):
                  exc_tb
                  ):
         if exc_type:  # an error occurred during the `with` statement
-            raise IOError(f"The following error occurred during API dialog :\n" +
-                          f"{exc_type} : {exc_val}\n" +
-                          f"{exc_tb}")
+            raise ConnectionError("Something went wrong during API communication").with_traceback(exc_tb)
         elif self.logoutURI:
             try:
                 self.__request("GET", self.logoutURI)  # deconnect from the API
